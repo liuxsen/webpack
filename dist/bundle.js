@@ -73,12 +73,16 @@ var messages = __webpack_require__(1)
 var app = document.getElementById('app')
 app.innerHTML = '<p>'+messages.hi+'</p>'
 
+if(false){
+  module.hot.accept()
+}
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
 
 module.exports = {
-  hi: 'oh hi there',
+  hi: 'oh hi theredfsdfsdfsdfsdf',
   event: 'haha'
 }
 

@@ -1,4 +1,4 @@
 module.exports = {
-  hi: 'oh hi there',
+  hi: 'oh hi theredfn-msdf',
   event: 'haha'
 }
