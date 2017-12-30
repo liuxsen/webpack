@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && webpack src/index.js dist/bundle.js --watch"
+    "build": "rimraf dist && webpack --watch",
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "rimraf": "^2.6.2",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   }
 }
