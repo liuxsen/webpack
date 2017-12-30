@@ -29,3 +29,8 @@ var server = new webpackDevServer(compiler, {
 });
 server.listen(8080);
 ```
+### babel
+
+法力无边的stage-0
+
+为什么说“stage-0” 法力无边呢，因为它包含stage-1, stage-2以及stage-3的所有功能，

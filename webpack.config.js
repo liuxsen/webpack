@@ -26,5 +26,15 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
     filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['babel-loader'],
+        // 排除node_modules 文件编译
+        exclude: '/node_modules/'
+      }
+    ]
   }
 }
