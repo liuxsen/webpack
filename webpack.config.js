@@ -20,6 +20,8 @@ var plugins = PRODUCTION
       new webpack.HotModuleReplacementPlugin()
     ]
 module.exports = {
+  // 文件地址保存下来
+  devtool: 'source-map',
   entry: entry,
   plugins: plugins,
   output: {
