@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 console.log('----------------------')
-console.log(process.env)
+console.log(process.env.NODE_ENV)
 var DEVELOPMENT = process.env.NODE_ENV === 'development'
 var PRODUCTION = process.env.NODE_ENV === 'produciton'
 
@@ -35,6 +35,14 @@ module.exports = {
         test: /\.js$/,
         use: ['babel-loader'],
         // 排除node_modules 文件编译
+        exclude: '/node_modules/'
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        // 当文件大于 10000btyes 的时候 自动找 file-loader 编译成文件保存在images文件夹下面
+        // 1kb = 1024b 1MB = 1024k
+        // 如果大于10k左右就用file-loader
+        use: ['url-loader?limit=10000&name=images/[name]_[hash:12].[ext]'],
         exclude: '/node_modules/'
       }
     ]
