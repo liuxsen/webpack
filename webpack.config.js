@@ -29,6 +29,9 @@ var plugins = PRODUCTION
       PRODUCTION: JSON.stringify(PRODUCTION)
     })
   )
+
+const cssIdentfier = PRODUCTION ? '[hash:base64:15]' : '[path][name]---[local]'
+
 module.exports = {
   // 文件地址保存下来
   devtool: 'source-map',
@@ -54,7 +57,12 @@ module.exports = {
         // 如果大于10k左右就用file-loader
         use: ['url-loader?limit=10000&name=images/[name]_[hash:12].[ext]'],
         exclude: '/node_modules/'
-      }
+      },
+      {
+        test: /\.(css)$/,
+        use: ['style-loader', 'css-loader?localIdentName=' + cssIdentfier],
+        exclude: '/node_modules/'
+      },
     ]
   }
 }
