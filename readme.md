@@ -34,3 +34,18 @@ server.listen(8080);
 法力无边的stage-0
 
 为什么说“stage-0” 法力无边呢，因为它包含stage-1, stage-2以及stage-3的所有功能，
+
+[babel用法总结](https://github.com/wy-ei/notebook/issues/40)
+[webpack2 终极优化](http://imweb.io/topic/5868e1abb3ce6d8e3f9f99bb)
+
+配置babel让它在编译转化es6代码时不把import export转换为cmd的module.export，配置如下：
+```json
+"presets": [
+  [
+    "es2015",
+    {
+      "modules": false
+    }
+  ]
+]
+```

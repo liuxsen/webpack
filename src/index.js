@@ -1,6 +1,7 @@
 var messages = require('./messages')
 import Button from './button'
-
+import { cube } from './math'
+console.log(cube())
 // var newMessage = () => `<p>${messages.event}</p>`
 // var newMessage2 = () => Button.button
 var image = require('./image')
