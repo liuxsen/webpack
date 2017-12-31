@@ -53,7 +53,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: PRODUCTION ? '/' : '/dist/',
-    filename: 'bundle.js'
+    filename: PRODUCTION? 'budule.[hash:12].min.js':'bundle.js'
   },
   module: {
     rules: [
