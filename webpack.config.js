@@ -16,18 +16,19 @@ var entry = PRODUCTION
 var plugins = PRODUCTION
     ? [
       // 删除没有用过的 模块
-      new webpack.optimize.UglifyJsPlugin({
-        comments: true,
-        mangle: false,
-        compress: {
-          warnings: true
-        }
-      })
+      new webpack.optimize.UglifyJsPlugin()
     ]
     : [
       // 添加热更新 插件
       new webpack.HotModuleReplacementPlugin()
     ]
+  plugins.push(
+    // 这个插件用来定义全局变量，在webpack打包的时候会对这些变量做替换。
+    new webpack.DefinePlugin({
+      DEVELOPMENT: JSON.stringify(DEVELOPMENT),
+      PRODUCTION: JSON.stringify(PRODUCTION)
+    })
+  )
 module.exports = {
   // 文件地址保存下来
   devtool: 'source-map',
