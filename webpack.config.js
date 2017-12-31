@@ -1,8 +1,10 @@
 var path = require('path')
 var webpack = require('webpack')
+// 提取公共样式到一个css文件中
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+// html 模板 动态插入html文件
+var HTMLWebpackPlugin = require('html-webpack-plugin')
 
-console.log('----------------------')
-console.log(process.env.NODE_ENV)
 var DEVELOPMENT = process.env.NODE_ENV === 'development'
 var PRODUCTION = process.env.NODE_ENV === 'produciton'
 
@@ -16,7 +18,13 @@ var entry = PRODUCTION
 var plugins = PRODUCTION
     ? [
       // 删除没有用过的 模块
-      new webpack.optimize.UglifyJsPlugin()
+      new webpack.optimize.UglifyJsPlugin(),
+      // 提取样式文件 并且做文件名hash
+    new ExtractTextPlugin('style-[contenthash:10].css'),
+    // 动态注入 css js文件 会根据 publicPath 生成路径
+    new HTMLWebpackPlugin({
+      template: 'index-template.html'
+    })
     ]
     : [
       // 添加热更新 插件
@@ -32,14 +40,19 @@ var plugins = PRODUCTION
 
 const cssIdentfier = PRODUCTION ? '[hash:base64:15]' : '[path][name]---[local]'
 
+// 生产环境下，提取文件
+const cssLoader = PRODUCTION 
+  ? ExtractTextPlugin.extract('css-loader?localIdentName=' + cssIdentfier)
+  : ['style-loader', 'css-loader?localIdentName=' + cssIdentfier]
+
 module.exports = {
   // 文件地址保存下来
-  devtool: 'source-map',
+  devtool: PRODUCTION ? 'none' : 'source-map',
   entry: entry,
   plugins: plugins,
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: PRODUCTION ? '/' : '/dist/',
     filename: 'bundle.js'
   },
   module: {
@@ -60,7 +73,7 @@ module.exports = {
       },
       {
         test: /\.(css)$/,
-        use: ['style-loader', 'css-loader?localIdentName=' + cssIdentfier],
+        use: cssLoader,
         exclude: '/node_modules/'
       },
     ]
